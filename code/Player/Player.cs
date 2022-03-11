@@ -20,7 +20,7 @@ namespace PTR
 
 			Controller = new WalkController();
 			Animator = new StandardPlayerAnimator();
-			CameraMode = new ThirdPersonCamera();
+			CameraMode = new PTRCamera();
 
 			EnableDrawing = true;
 		}
