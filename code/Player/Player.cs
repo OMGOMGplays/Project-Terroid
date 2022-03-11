@@ -18,8 +18,8 @@ namespace PTR
 
 			SetModel( "models/citizen/citizen.vmdl" );
 
-			Controller = new WalkController();
-			Animator = new StandardPlayerAnimator();
+			Controller = new PTRPlayerMovement();
+			Animator = new PTRPlayerAnimator();
 			CameraMode = new PTRCamera();
 
 			EnableDrawing = true;
