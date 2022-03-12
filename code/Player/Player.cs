@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using PTR.UI;
 using System;
 using System.Linq;
 
@@ -28,6 +29,11 @@ namespace PTR
 		public override void Simulate( Client cl )
 		{
 			base.Simulate( cl );
+
+			if (Input.Pressed(InputButton.Menu)) 
+			{
+				Shout();
+			}
 		}
 	}
 }

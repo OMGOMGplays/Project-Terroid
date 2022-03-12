@@ -64,21 +64,22 @@ namespace PTR
 		{
 			var player = Pawn as Player;
 
+			var dir = Velocity;
+
+			Vector3 currMoveDir = Pawn.EyePosition + dir * 200;
+
 			//
 			// Our ideal player model rotation is the way we're facing
 			//
 			var allowYawDiff = player?.ActiveChild == null ? 90 : 50;
 
-			// float turnSpeed = 0.01f;
+			float turnSpeed = 0.01f;
 			// if ( HasTag( "ducked" ) ) turnSpeed = 0.1f;
-
-			var dir = Velocity;
-			Vector3 rotation = Pawn.EyePosition + dir * 200;
 
 			//
 			// If we're moving, rotate to our ideal rotation
 			//
-			Rotation = Rotation.Slerp( Rotation, idealRotation, rotation.Length /* Time.Delta * turnSpeed*/ );
+			Rotation = Rotation.Slerp( Rotation, idealRotation, currMoveDir.Length * Time.Delta * turnSpeed );
 
 			//
 			// Clamp the foot rotation to within 120 degrees of the ideal rotation
