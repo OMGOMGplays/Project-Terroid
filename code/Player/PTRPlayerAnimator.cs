@@ -11,8 +11,11 @@ namespace PTR
 
 		public override void Simulate()
 		{
-			var player = Pawn as Player;
-			var idealRotation = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up );
+			var dir = Velocity;
+
+			Vector3 currMoveDir = Pawn.EyePosition + dir * 200;
+
+			var idealRotation = Rotation.LookAt( currMoveDir, Vector3.Up );
 
 			DoRotation( idealRotation );
 			DoWalk();
@@ -33,23 +36,19 @@ namespace PTR
 				SetAnimParameter( "voice", Client.TimeSinceLastVoice < 0.5f ? Client.VoiceLevel : 0.0f );
 			}
 
-			Vector3 aimPos = Pawn.EyePosition + Input.Rotation.Forward * 200;
-			Vector3 lookPos = aimPos;
-			Vector3 headLookPos = Pawn.EyePosition;
-
 			//
 			// Look in the direction what the player's input is facing
 			//
-			SetLookAt( "aim_eyes", lookPos );
-			SetLookAt( "aim_head", headLookPos );
-			SetLookAt( "aim_body", aimPos );
+			SetLookAt( "aim_eyes", currMoveDir );
+			SetLookAt( "aim_head", currMoveDir );
+			SetLookAt( "aim_body", currMoveDir );
 
 			if ( HasTag( "ducked" ) ) duck = duck.LerpTo( 1.0f, Time.Delta * 10.0f );
 			else duck = duck.LerpTo( 0.0f, Time.Delta * 5.0f );
 
 			SetAnimParameter( "duck", duck );
 
-			if ( player != null && player.ActiveChild is BaseCarriable carry )
+			if ( Pawn is Player player && player.ActiveChild is BaseCarriable carry )
 			{
 				carry.SimulateAnimator( this );
 			}
@@ -70,13 +69,16 @@ namespace PTR
 			//
 			var allowYawDiff = player?.ActiveChild == null ? 90 : 50;
 
-			float turnSpeed = 0.01f;
-			if ( HasTag( "ducked" ) ) turnSpeed = 0.1f;
+			// float turnSpeed = 0.01f;
+			// if ( HasTag( "ducked" ) ) turnSpeed = 0.1f;
+
+			var dir = Velocity;
+			Vector3 rotation = Pawn.EyePosition + dir * 200;
 
 			//
 			// If we're moving, rotate to our ideal rotation
 			//
-			Rotation = Rotation.Slerp( Rotation, idealRotation, WishVelocity.Length * Time.Delta * turnSpeed );
+			Rotation = Rotation.Slerp( Rotation, idealRotation, rotation.Length /* Time.Delta * turnSpeed*/ );
 
 			//
 			// Clamp the foot rotation to within 120 degrees of the ideal rotation

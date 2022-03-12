@@ -89,7 +89,7 @@ namespace PTR
 		{
 			base.FrameSimulate();
 
-			EyeRotation = Input.Rotation;
+			// EyeRotation = Input.Rotation;
 		}
 
 		public override void Simulate()
@@ -98,7 +98,7 @@ namespace PTR
 			UpdateBBox();
 
 			EyeLocalPosition += TraceOffset;
-			EyeRotation = Input.Rotation;
+			// EyeRotation = Input.Rotation;
 
 			RestoreGroundPos();
 
@@ -179,7 +179,7 @@ namespace PTR
 			//
 			WishVelocity = new Vector3( Input.Forward, Input.Left, 0 );
 			var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
-			WishVelocity *= Input.Rotation.Angles().WithPitch( 0 );
+			// WishVelocity *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
 
 			if ( !Swimming && !IsTouchingLadder )
 			{

@@ -20,7 +20,7 @@ namespace PTR
 			Position = center += (Vector3.Backward * 100 + Vector3.Right * 100);
 			Rotation = Rotation.FromAxis(Vector3.Up, 40);
 			Rotation += Rotation.FromPitch(40);
-			Rotation -= Rotation.FromRoll(12);
+			Rotation -= Rotation.FromRoll(15);
 
 			float distance = 100.0f * pawn.Scale;
 			targetPos = Position + ((pawn.CollisionBounds.Maxs.x + 15) * pawn.Scale);
