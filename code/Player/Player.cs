@@ -29,11 +29,6 @@ namespace PTR
 		public override void Simulate( Client cl )
 		{
 			base.Simulate( cl );
-
-			if (Input.Pressed(InputButton.Menu)) 
-			{
-				Shout();
-			}
 		}
 	}
 }

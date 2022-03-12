@@ -7,7 +7,7 @@ namespace PTR
 	partial class PTRPlayer 
 	{
 		public ShoutText ShoutText;
-
+		public float NoiseRange = 950;
 		public TimeSince TimeSincePanelCreated;
 
 		[ClientRpc]
@@ -17,11 +17,26 @@ namespace PTR
 			ShoutText = new ShoutText();
 			var transform = new Transform(Position + Vector3.Up * 64 + Vector3.Right * 10);
 			ShoutText.Transform = transform;
+
+			// ((Local.Pawn as PTRPlayer) as AnimEntity).SetAnimParameter("voice", 1f);
+
+			DebugOverlay.Sphere(Position, NoiseRange, Color.Red, true, 15);
 		}
 
 		public override void FrameSimulate( Client cl )
 		{
 			base.FrameSimulate( cl );
+
+
+			if (Input.Pressed(InputButton.Menu) && ShoutText == null) 
+			{
+				Shout();
+			}
+			
+			if (Input.Pressed(InputButton.Menu) && ShoutText != null) 
+			{
+				return;
+			}
 
 			if (ShoutText == null)
 				return;
