@@ -5,14 +5,8 @@ using System.Linq;
 
 namespace PTR
 {
-	partial class PTRPlayer : Player
+	public partial class PTRPlayer : Player
 	{
-
-		// public override void Spawn()
-		// {
-		// 	base.Spawn();
-		// }
-
 		public override void Respawn()
 		{
 			base.Respawn();

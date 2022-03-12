@@ -4,7 +4,7 @@ using Sandbox.UI.Construct;
 
 namespace PTR.UI 
 {
-	class ShoutText : WorldPanel 
+	public class ShoutText : WorldPanel 
 	{
 		public ShoutText() 
 		{

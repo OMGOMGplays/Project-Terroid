@@ -18,8 +18,6 @@ namespace PTR
 			var transform = new Transform(Position + Vector3.Up * 64 + Vector3.Right * 10);
 			ShoutText.Transform = transform;
 
-			// ((Local.Pawn as PTRPlayer) as AnimEntity).SetAnimParameter("voice", 1f);
-
 			DebugOverlay.Sphere(Position, NoiseRange, Color.Red, true, 15);
 		}
 
